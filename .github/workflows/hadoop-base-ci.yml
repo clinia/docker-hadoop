@@ -19,7 +19,7 @@ jobs:
         id: prep
         run: |
           DOCKER_IMAGE=ghcr.io/clinia/hadoop-base
-          HADOOP_VERSION=${{ github.event.inputs.version }}
+          HADOOP_VERSION=${{ github.event.inputs.hadoop_version }}
           TAGS="${DOCKER_IMAGE}:hadoop${HADOOP_VERSION}-java8"
 
           echo ::set-output name=tags::${TAGS}
