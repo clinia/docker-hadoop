@@ -41,7 +41,6 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           # https://github.com/nodejs/docker-node/issues/1335
           # platforms: linux/amd64,linux/arm64
-          context: .
-          file: ./apps/workspace/Dockerfile
+          context: base
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
