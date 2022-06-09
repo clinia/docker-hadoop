@@ -1,6 +1,6 @@
 FROM debian:9
 
-LABEL org.opencontainers.image.source https://github.com/clinia/hadoop-base
+LABEL org.opencontainers.image.source https://github.com/clinia/docker-hadoop
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       openjdk-8-jdk \
