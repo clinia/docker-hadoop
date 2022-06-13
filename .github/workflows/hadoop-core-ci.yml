@@ -1,10 +1,15 @@
-name: Hadoop Base Release
+name: Hadoop Core Release
 
 on:
   workflow_dispatch:
+    inputs:
+      hadoop_version:
+        description: 'Haddoop version to build the image on'
+        required: true
+        default: '3.2.1'
 
 jobs:
-  'hadoop-base':
+  'hadoop-core':
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -13,9 +18,9 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=ghcr.io/clinia/hadoop-base
+          DOCKER_IMAGE=ghcr.io/clinia/hadoop-core
           HADOOP_VERSION=${{ github.event.inputs.hadoop_version }}
-          TAGS="${DOCKER_IMAGE}:java8"
+          TAGS="${DOCKER_IMAGE}:hadoop${HADOOP_VERSION}-java8"
 
           echo ::set-output name=tags::${TAGS}
 
@@ -39,6 +44,6 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/amd64,linux/arm64
-          context: base
+          context: core
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
